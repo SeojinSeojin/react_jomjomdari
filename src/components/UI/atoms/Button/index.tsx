@@ -19,7 +19,7 @@ const buttonStyle = (props: ButtonStyles) => css`
   padding: 10px 20px;
   box-sizing: content-box;
   cursor: pointer;
-  ${props.selected && `border: 2px solid ${props.selectedLineColor};`}
+  border: 2px solid ${props.selected ? props.selectedLineColor : 'transparent'};
 `;
 
 function Button(props: ButtonProps) {
