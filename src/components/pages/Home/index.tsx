@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { css } from '@emotion/react';
+import PaperReceiver from '../../UI/organisms/PaperReceiver';
+import PaperViewer from '../../UI/organisms/PaperViewer';
 
 function HomePage() {
-  const wrapperStyle = css`
-    background-color: black;
-  `;
-  return <div css={wrapperStyle}>hello</div>;
+  return (
+    <div>
+      <PaperReceiver />
+      <PaperViewer />
+    </div>
+  );
 }
 
 export default HomePage;
