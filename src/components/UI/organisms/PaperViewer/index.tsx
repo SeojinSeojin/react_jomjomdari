@@ -1,24 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { paperState } from '../../../../states/papers';
 import Button from '../../atoms/Button';
 import Paper from '../../molecules/Paper';
 import { wrapperStyle } from './style';
 
-type PaperProps = {
-  body: string;
-  sender: string;
-};
-
 function PaperViewer() {
-  const [pages, setPages] = useState<PaperProps[]>([
-    { body: '안녕', sender: '안녕' },
-    { body: '안녕', sender: '안녕' },
-    { body: '안녕', sender: '안녕' },
-    { body: '안녕', sender: '안녕' },
-    { body: '안녕', sender: '안녕' },
-  ]);
   const [gridColumns, setGridColumns] = useState<number>(1);
+  const papers = useRecoilValue(paperState);
 
   return (
     <>
@@ -34,8 +25,8 @@ function PaperViewer() {
         ))}
       </div>
       <div css={wrapperStyle({ gridColumns })}>
-        {pages.map((page: PaperProps) => (
-          <Paper props={page} />
+        {papers.map((paper) => (
+          <Paper props={paper} />
         ))}
       </div>
     </>

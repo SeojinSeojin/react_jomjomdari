@@ -12,7 +12,11 @@ function PaperReceiver() {
 
   return (
     <>
-      {receiver ? <div>To. {receiver}</div> : <Input onSubmit={saveReceiver} />}
+      {receiver ? (
+        <div>To. {receiver}</div>
+      ) : (
+        <Input placeholder='받는사람' onSubmit={saveReceiver} />
+      )}
     </>
   );
 }

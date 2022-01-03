@@ -5,12 +5,13 @@ import { wrapperStyle } from './style';
 type PaperProps = {
   body: string;
   sender: string;
+  color: string;
 };
 
 function Paper({ props }: { props: PaperProps }) {
-  const { body, sender } = props;
+  const { body, sender, color } = props;
   return (
-    <div css={wrapperStyle}>
+    <div css={wrapperStyle({ color })}>
       <div>{body}</div>
       <div>{sender}</div>
     </div>

@@ -17,9 +17,9 @@ const buttonStyle = (props: ButtonStyles) => css`
   background-color: ${props.backgroundColor};
   border-radius: 20px;
   padding: 10px 20px;
-  box-sizing: border-box;
+  box-sizing: content-box;
   cursor: pointer;
-  ${props.selected && `border: 1px solid ${props.selectedLineColor};`}
+  ${props.selected && `border: 2px solid ${props.selectedLineColor};`}
 `;
 
 function Button(props: ButtonProps) {
