@@ -23,13 +23,9 @@ const buttonStyle = (props: ButtonStyles) => css`
 `;
 
 function Button(props: ButtonProps) {
-  const { content, onClick, backgroundColor, selected, selectedLineColor } =
-    props;
+  const { content, onClick, ...styles } = props;
   return (
-    <div
-      onClick={onClick}
-      css={buttonStyle({ backgroundColor, selected, selectedLineColor })}
-    >
+    <div onClick={onClick} css={buttonStyle({ ...styles })}>
       {content}
     </div>
   );
