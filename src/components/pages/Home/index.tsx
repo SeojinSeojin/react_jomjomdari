@@ -5,7 +5,7 @@ import PaperViewer from '../../UI/organisms/PaperViewer';
 
 function HomePage() {
   return (
-    <div>
+    <div css={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PaperReceiver />
       <PaperViewer />
     </div>
