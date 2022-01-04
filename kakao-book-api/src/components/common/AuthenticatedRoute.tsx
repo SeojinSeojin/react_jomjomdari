@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuthentication } from '../../hooks/useAuthentication';
 
-function AuthenticatedRoute({ component: RouteComponent }) {
+function AuthenticatedRoute({ component }: { component: ReactElement }) {
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated) {
-    return <RouteComponent />;
+    return <>{component}</>;
   }
 
   return <Navigate to='/' />;
