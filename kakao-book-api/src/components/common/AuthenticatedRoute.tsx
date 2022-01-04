@@ -4,7 +4,7 @@ import { useAuthentication } from '../../hooks/useAuthentication';
 
 function AuthenticatedRoute({ component }: { component: ReactElement }) {
   const { isAuthenticated } = useAuthentication();
-
+  console.log(isAuthenticated);
   if (isAuthenticated) {
     return <>{component}</>;
   }
