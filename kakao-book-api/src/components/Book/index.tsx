@@ -1,4 +1,5 @@
 import React from 'react';
+import { Wrapper } from './style';
 
 type BookType = {
   title: string;
@@ -9,7 +10,7 @@ type BookType = {
 
 function Book(book: BookType) {
   return (
-    <div
+    <Wrapper
       onClick={() => {
         window.location.href = book.url;
       }}
@@ -17,7 +18,7 @@ function Book(book: BookType) {
       <div key={book.title}>{book.title}</div>
       <img src={book.thumbnail} alt={book.title} />
       <div>{book.price}</div>
-    </div>
+    </Wrapper>
   );
 }
 

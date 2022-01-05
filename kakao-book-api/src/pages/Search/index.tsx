@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Book from '../../components/Book';
 import Selector from '../../components/common/Selector';
 import { useAuthentication } from '../../hooks/useAuthentication';
+import { BookWrapper, SelectorWrapper } from './style';
 
 type BookType = {
   title: string;
@@ -28,7 +29,7 @@ function SearchPage() {
   }, [selectedQuery, token]);
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <SelectorWrapper>
         {['수학', '과학', '국어', '영어'].map((query) => (
           <Selector
             key={query}
@@ -37,8 +38,8 @@ function SearchPage() {
             onClick={() => setSelectedQuery(query)}
           />
         ))}
-      </div>
-      <div>
+      </SelectorWrapper>
+      <BookWrapper>
         {books.map((book) => (
           <Book
             title={book.title}
@@ -48,7 +49,7 @@ function SearchPage() {
             key={book.title}
           />
         ))}
-      </div>
+      </BookWrapper>
     </>
   );
 }
