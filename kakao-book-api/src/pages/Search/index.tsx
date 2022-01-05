@@ -1,5 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 import Book from '../../components/Book';
 import Selector from '../../components/common/Selector';
 import { useAuthentication } from '../../hooks/useAuthentication';
@@ -14,19 +15,29 @@ type BookType = {
 
 function SearchPage() {
   const { token } = useAuthentication();
+  const [searchParams, setSearchParams] = useSearchParams({ query: '' });
   const [selectedQuery, setSelectedQuery] = useState<string | null>(null);
   const [books, setBooks] = useState<BookType[]>([]);
+
   useEffect(() => {
-    if (!token || !selectedQuery) return;
+    const searchQuery = searchParams.get('query');
+    if (!token || !searchQuery) return;
     axios
       .get(
-        `https://dapi.kakao.com/v3/search/book?target=title&query=${selectedQuery}`,
+        `https://dapi.kakao.com/v3/search/book?target=title&query=${searchQuery}`,
         { headers: { Authorization: token } }
       )
       .then((res) => {
         setBooks(res.data.documents);
       });
-  }, [selectedQuery, token]);
+    selectedQuery !== searchQuery && setSelectedQuery(searchQuery);
+  }, [searchParams, token]);
+
+  useEffect(() => {
+    if (!selectedQuery) return;
+    setSearchParams({ query: selectedQuery });
+  }, [selectedQuery]);
+
   return (
     <>
       <SelectorWrapper>
