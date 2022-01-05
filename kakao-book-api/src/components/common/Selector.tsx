@@ -10,7 +10,10 @@ function Selector(props: SelectorProps) {
   return (
     <div
       onClick={onClick}
-      style={{ border: isSelected ? '1px solid black' : 'none' }}
+      style={{
+        border: isSelected ? '1px solid black' : 'none',
+        cursor: 'pointer',
+      }}
     >
       {content}
     </div>

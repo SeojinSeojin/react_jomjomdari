@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Book from '../../components/Book';
 import Selector from '../../components/common/Selector';
 import { useAuthentication } from '../../hooks/useAuthentication';
 
@@ -26,28 +27,29 @@ function SearchPage() {
       });
   }, [selectedQuery, token]);
   return (
-    <div>
-      {['수학', '과학', '국어', '영어'].map((query) => (
-        <Selector
-          key={query}
-          isSelected={selectedQuery === query}
-          content={query}
-          onClick={() => setSelectedQuery(query)}
-        />
-      ))}
-      {books.map((book) => (
-        <div
-          onClick={() => {
-            window.location.href = book.url;
-          }}
-          key={book.title}
-        >
-          <div key={book.title}>{book.title}</div>
-          <img src={book.thumbnail} alt={book.title} />
-          <div>{book.price}</div>
-        </div>
-      ))}
-    </div>
+    <>
+      <div style={{ display: 'flex' }}>
+        {['수학', '과학', '국어', '영어'].map((query) => (
+          <Selector
+            key={query}
+            isSelected={selectedQuery === query}
+            content={query}
+            onClick={() => setSelectedQuery(query)}
+          />
+        ))}
+      </div>
+      <div>
+        {books.map((book) => (
+          <Book
+            title={book.title}
+            price={book.price}
+            thumbnail={book.thumbnail}
+            url={book.url}
+            key={book.title}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
