@@ -20,7 +20,11 @@ function SearchPage() {
   const [books, setBooks] = useState<BookType[]>([]);
 
   useEffect(() => {
-    if (!token || !selectedQuery || selectedQuery === '') return;
+    if (!token) return;
+    if (selectedQuery === '' || !selectedQuery) {
+      setBooks([]);
+      return;
+    }
     axios
       .get(
         `https://dapi.kakao.com/v3/search/book?target=title&query=${selectedQuery}`,
