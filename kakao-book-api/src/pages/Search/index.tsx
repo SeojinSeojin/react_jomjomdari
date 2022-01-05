@@ -20,23 +20,21 @@ function SearchPage() {
   const [books, setBooks] = useState<BookType[]>([]);
 
   useEffect(() => {
-    const searchQuery = searchParams.get('query');
-    if (!token || !searchQuery) return;
+    if (!token || !selectedQuery || selectedQuery === '') return;
     axios
       .get(
-        `https://dapi.kakao.com/v3/search/book?target=title&query=${searchQuery}`,
+        `https://dapi.kakao.com/v3/search/book?target=title&query=${selectedQuery}`,
         { headers: { Authorization: token } }
       )
       .then((res) => {
         setBooks(res.data.documents);
       });
-    selectedQuery !== searchQuery && setSelectedQuery(searchQuery);
-  }, [searchParams, token]);
+  }, [selectedQuery, token]);
 
   useEffect(() => {
-    if (!selectedQuery) return;
-    setSearchParams({ query: selectedQuery });
-  }, [selectedQuery]);
+    const searchQuery = searchParams.get('query');
+    setSelectedQuery(searchQuery);
+  }, [searchParams]);
 
   return (
     <>
@@ -46,7 +44,7 @@ function SearchPage() {
             key={query}
             isSelected={selectedQuery === query}
             content={query}
-            onClick={() => setSelectedQuery(query)}
+            onClick={() => setSearchParams({ query })}
           />
         ))}
       </SelectorWrapper>
