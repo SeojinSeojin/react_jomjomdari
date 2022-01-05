@@ -13,6 +13,7 @@ function App() {
           path='/search'
           element={<AuthenticatedRoute component={<SearchPage />} />}
         />
+        {/* <SecretRoute path="/search" redirect="/" element={<SearchPage />} /> */}
       </Routes>
     </>
   );

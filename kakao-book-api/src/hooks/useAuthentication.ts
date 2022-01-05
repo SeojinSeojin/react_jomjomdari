@@ -4,7 +4,6 @@ export function useAuthentication() {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    console.log('token', token);
     if (token) localStorage.setItem('token', token);
     else localStorage.removeItem('token');
   }, [token]);
