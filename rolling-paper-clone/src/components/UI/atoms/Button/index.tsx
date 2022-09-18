@@ -10,7 +10,7 @@ type ButtonStyles = {
 
 type ButtonProps = ButtonStyles & {
   content: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
 };
 
 const buttonStyle = (props: ButtonStyles) => css`

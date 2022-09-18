@@ -13,9 +13,11 @@ function PaperViewer() {
 
   return (
     <>
-      <div css={{ display: 'flex', gap: '20px' }}>
+      <div css={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <div>정렬 방식 선택</div>
         {[1, 2, 3].map((number) => (
           <Button
+            key={number}
             content={`${number}`}
             onClick={() => setGridColumns(number)}
             backgroundColor='#EEEEEE'

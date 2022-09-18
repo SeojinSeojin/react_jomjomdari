@@ -2,7 +2,7 @@
 import React from 'react';
 import { wrapperStyle } from './style';
 
-type PaperProps = {
+export type PaperProps = {
   body: string;
   sender: string;
   color: string;

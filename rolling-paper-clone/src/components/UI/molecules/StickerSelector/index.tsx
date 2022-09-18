@@ -9,10 +9,13 @@ function StickerSelector() {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const setStickers = useSetRecoilState(stickerState);
-  const toggleSelectedSticker = (sticker: string) =>
-    sticker === selectedSticker
-      ? setSelectedSticker(null)
-      : setSelectedSticker(sticker);
+  const toggleSelectedSticker = (sticker: string) => {
+    if (sticker === selectedSticker) {
+      setSelectedSticker(null);
+    } else {
+      setSelectedSticker(sticker);
+    }
+  };
 
   useEffect(() => {
     const saveSticker = (e: MouseEvent) => {
@@ -27,7 +30,7 @@ function StickerSelector() {
     return () => {
       document.removeEventListener('click', saveSticker);
     };
-  }, [selectedSticker, mouseX, mouseY]);
+  }, [selectedSticker, mouseX, mouseY, setStickers]);
 
   useEffect(() => {
     const trackMouse = (e: MouseEvent) => {
@@ -42,16 +45,23 @@ function StickerSelector() {
     };
   }, [selectedSticker]);
   return (
-    <div css={{ display: 'flex', fontSize: '20px' }}>
-      {['👍', '💖', '🤪'].map((sticker) => (
-        <Button
-          content={sticker}
-          backgroundColor='white'
-          selected={selectedSticker === sticker}
-          selectedLineColor='black'
-          onClick={() => toggleSelectedSticker(sticker)}
-        />
-      ))}
+    <div css={{ display: 'flex', alignItems: 'center' }}>
+      <div>스티커 누르기</div>
+      <div css={{ display: 'flex', fontSize: '20px' }}>
+        {['👍', '💖', '🤪'].map((sticker) => (
+          <Button
+            key={sticker}
+            content={sticker}
+            backgroundColor='white'
+            selected={selectedSticker === sticker}
+            selectedLineColor='black'
+            onClick={(e: React.MouseEvent) => {
+              e.stopPropagation();
+              toggleSelectedSticker(sticker);
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
